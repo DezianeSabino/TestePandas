@@ -1,0 +1,48 @@
+import pandas as pd
+import os
+
+#df = pd.read_csv('data.csv')
+#print(df.to_string()) 
+#print(pd.options.display.max_rows) 
+
+caminho_csv = r'C:\Users\Aluno\Desktop\Deziane\data.csv'
+caminho_excel = r'C:\Users\Aluno\Desktop\Deziane\data_novo.xlsx'
+conteudo_arquivo = ""
+
+
+def LerCSV():
+    global conteudo_arquivo
+    conteudo_arquivo = pd.read_csv(caminho_csv)
+    print(conteudo_arquivo)
+
+
+def ConverterCSVEmExcel():
+    conteudo_arquivo.to_excel(caminho_excel, index=False)
+    print(f'Arquivo Excel criado: {caminho_excel}')
+
+def AbrirExcel():
+    os.startfile(caminho_excel)
+
+def SelecionarBairros():
+    global conteudo_arquivo
+    bairros = [ "Tatuapé", "Itaquera", "Cidade Patriarca"]
+    conteudo_arquivo = conteudo_arquivo[conteudo_arquivo["district"].isin(bairros)]
+    print(conteudo_arquivo)
+
+def SelecionarTamanho():
+    global conteudo_arquivo
+    conteudo_arquivo = conteudo_arquivo[conteudo_arquivo["area"] > 50]
+    print(conteudo_arquivo)
+
+def SelecionarGaragem():
+    global conteudo_arquivo
+    conteudo_arquivo = conteudo_arquivo[conteudo_arquivo["garage"] == 1]
+    print(conteudo_arquivo)
+
+
+LerCSV()
+SelecionarBairros()
+SelecionarTamanho()
+SelecionarGaragem()
+ConverterCSVEmExcel()
+AbrirExcel()
