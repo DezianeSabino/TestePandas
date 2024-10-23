@@ -31,7 +31,7 @@ def SelecionarBairros():
 
 def SelecionarTamanho():
     global conteudo_arquivo
-    conteudo_arquivo = conteudo_arquivo[conteudo_arquivo["area"] > 50]
+    conteudo_arquivo = conteudo_arquivo[conteudo_arquivo["area"] > 30]
     print(conteudo_arquivo)
 
 def SelecionarGaragem():
@@ -39,10 +39,21 @@ def SelecionarGaragem():
     conteudo_arquivo = conteudo_arquivo[conteudo_arquivo["garage"] == 1]
     print(conteudo_arquivo)
 
+def ExcluirCasa():
+    global conteudo_arquivo
+    conteudo_arquivo = conteudo_arquivo[conteudo_arquivo["type"] != "Casa"]
+    print(conteudo_arquivo)
+
+def SelecionarValor():
+    global conteudo_arquivo
+    conteudo_arquivo = conteudo_arquivo[conteudo_arquivo["total"] <= 3000]
+    print(conteudo_arquivo)
 
 LerCSV()
 SelecionarBairros()
 SelecionarTamanho()
 SelecionarGaragem()
+ExcluirCasa()
+SelecionarValor()
 ConverterCSVEmExcel()
 AbrirExcel()
